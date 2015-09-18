@@ -1,0 +1,24 @@
+.row
+  .col-md-4.col-md-offset-2
+    %h1 Username
+    %h3 Products:
+    %h3 Total Sales:
+    %h3 Storage Space:
+    %br
+    .btn.btn-danger.btn-lg
+      %span.glyphicon-plus
+        Upload New Product
+  .col-md-5
+    %h1.text-center Products
+    %table.product-info.table.table-striped
+      %tr.bold
+        %td Product
+        %td Price
+        %td Weekly Sales
+        %td Total Sales        
+      -5.times do
+        %tr
+          %td Tickle Me Elmo for Dummies
+          %td $12.20
+          %td $321.3
+          %td $912.2

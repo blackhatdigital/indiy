@@ -1,0 +1,29 @@
+html, body {
+  height: 100% !important;
+  margin:0; padding:0;
+}
+
+h1 {
+  font-size: 350%;
+}
+p.lead {
+  font-size: 180%;
+}
+.container-fluid {
+  min-height:100% !important;
+  margin-bottom:-90px;
+  padding-bottom:10px;
+  overflow:hidden;
+}
+.center {
+  margin:0 auto !important;
+}
+.example-image {
+  width:90%;
+  height:60vh;
+  margin:0 auto !important;
+  border:1px dotted gray;
+}
+.btn-text-center {
+  line-height:100%;
+}

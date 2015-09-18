@@ -1,0 +1,23 @@
+.row.text-center
+  .col-md-12
+    %h1 Upload New Product
+%hr
+.row
+  .col-md-5.col-md-offset-1
+    %form.form-vertical
+      %input.form-control.form-group(name="name" placeholder="Product Name" type="text")
+      %input.form-control.form-group(name="price" placeholder="Price" type="number")
+      %input.form-control.form-group(name="short_desc" placeholder="Short Description" type="text")
+      %textarea.form-control.form-group(name="long_desc" placeholder="Long Description")
+      .form-group
+        %label(for="product_file") Product File:
+        %input.form-control(name="product_file"   placeholder="Product File" type="file")
+        %p.help-block Maximum size: 500mb
+      .form-group
+        %label(for="product_file") Product Thumbnail:
+        %input.form-control(name="product_file"   placeholder="Product File" type="file")
+        %p.help-block Recommended 200 x 200 px
+      %input.form-control.form-group.btn.btn-success.btn-lg.btn-text-center(type="submit" value="Upload Product")
+  .col-md-6
+    .example-image Example Product Page . jpg
+
