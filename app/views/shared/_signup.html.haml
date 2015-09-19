@@ -3,9 +3,9 @@
     %h2.text-center
       Sign Up Now
     %br
-    %form.form-horizontal.center.text-center
-      %input.form-control.form-group(type="text"  placeholder="Username" name="username")
-      %input.form-control.form-group(type="password"  name="password" placeholder="Password")
-      %input.form-control.form-group(type="email"  placeholder="Email Address" name="email")
-      %input.btn.btn-primary.btn-lg(type="submit"   value="Sign Up")
+    =bootstrap_form_for @user, html: {class: 'form-   horizontal center text-center'} do |f|
+      =f.text_field :username
+      =f.password_field :password
+      =f.email_field :email
+      =f.submit "Create Account", class: "btn btn-primary     btn-lg"
   

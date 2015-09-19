@@ -8,6 +8,9 @@
   %body
   .container-fluid
     =render '/shared/header' if @product.blank?
+    =render '/shared/messages'
     = yield
     .push
   =render '/shared/footer'
+
+<script>$('.fadeit').delay(2000).fadeOut(300)</script>

@@ -11,10 +11,10 @@
     #main-nav-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         %li
-          %a(href="#") How it Works
+          =link_to "How it Works", how_it_works_path
         %li
-          %a(href="#") Pricing
+          =link_to "Pricing", pricing_path
         %li
-          %a(href="#") Log In
+          =link_to "Log In", new_session_path
         %li
-          %a.btn.btn-default(href="#") Sign Up
+          =link_to "Sign Up", new_user_path, class: "btn btn-default"
