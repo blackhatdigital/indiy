@@ -1,0 +1,13 @@
+.row.text-center
+  .col-md-12
+    %h1 Upload New Product
+%hr
+.row
+  .col-md-5.col-md-offset-1
+    =bootstrap_form_for_tag, html: {class: "form-vertical"} do |f|
+      %p.help-block Recommended 200 x 200 px
+      =f.file_field :product_file
+      %p.help-block Maximum size: 500mb
+      =f.submit "Upload Product", class: "form-control form-group btn btn-success btn-lg btn-text-center"
+  .col-md-6
+    .example-image Example Product Page . jpg

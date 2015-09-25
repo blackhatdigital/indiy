@@ -1,0 +1,28 @@
+-@layout = "product"
+.row
+  .col-md-4.col-md-offset-1
+    %img.product
+  .col-md-6.col-md-offset-1.product-desc
+    %h1 Product Name | $19.99
+    %p.lead Product Slogan Information will go here, just a short description
+    .btn.btn-lg.btn-success.text-center.disabled Buy Now
+%hr
+.row
+  .col-md-6.col-md-offset-3.text-center.pad-bottom
+    %h1 Payment Details
+    %br
+    =bootstrap_form_tag url: "/payments" do |f|
+      =f.text_field :full_name, label: "Full Name:"
+      =f.email_field :email
+      %fieldset
+        .form-group
+          %label.control-label(for="credit-card") Credit Card Number
+          %input.form-control#credit-card(type="text" data-stripe='number')
+        .form-group
+          %label.control-label Expiration
+          =select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
+          = select_year(Date.today.year, {start_year: Date.today.year,  end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})     
+        .form-group
+          %label.control-label(for="security-code") Security Code
+          %input.form-control#security-code(type="text" data-stripe='cvc' )
+      =f.submit "Purchase Product", class: "btn btn-primary btn-lg"

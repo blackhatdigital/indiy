@@ -1,13 +1,23 @@
 Rails.application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
   root 'static#landing'
+  get '/auth/stripe_connect/callback', to: "connect#create"
 
   get '/pricing', to: 'static#pricing', as: "pricing"
   get '/how-it-works', to: 'static#how_it_works', as: "how_it_works"
   get "/thank-you", to: "static#thank_you", as: "thankyou"
 
-  resources :users
-  resources :sessions, only: [:new,:create,:destroy]
+  resources :users do
+    resources :products do
+      resources :payments, only: [:new,:create,:index]
+    end
+  end
+
+  
+
+
+  resources :sessions, only: [:new,:create]
+  get "/sessions/destroy", to: "sessions#destroy", as: "logout"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

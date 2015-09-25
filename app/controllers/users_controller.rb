@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  before_action :logged_in_only, except: [:new, :create]
   def show
     @user = current_user
+    @products = Product.all
   end
 
   def new

@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe StaticController, :type => :controller do
+
+  describe "GET landing" do
+    it "isnt available to logged_in users" do
+      @user = Fabricate(:user)
+      session[:user_id] = @user.id
+      get :landing
+      expect(response).to redirect_to user_path(@user)
+    end
+  end
   describe "GET how_it_works" do
     it "renders the template" do
       get :how_it_works

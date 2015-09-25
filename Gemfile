@@ -13,6 +13,15 @@ gem 'bootstrap_form'
 gem 'bcrypt'
 gem 'figaro'
 gem 'sidekiq'
+gem 'omniauth'
+gem 'omniauth-stripe-connect'
+gem 'stripe'
+gem 'rest-client'
+gem 'fog'
+gem 'carrierwave'
+gem 'carrierwave_direct'
+gem 'mini_magick'
+gem 'chartkick'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -44,6 +53,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
+  gem 'guard-rspec', require: false
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

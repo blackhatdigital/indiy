@@ -1,0 +1,17 @@
+!!! 5
+%html(lang="en-US")
+  %head
+    %title Indiy
+    = stylesheet_link_tag    'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = yield :head
+  %body
+  .container-fluid
+    =render '/shared/header' if @product.blank?
+    =render '/shared/messages'
+    = yield
+    .push
+  =render '/shared/footer'
+
+<script>$('.fadeit').delay(2000).fadeOut(300)</script>

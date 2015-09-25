@@ -1,0 +1,46 @@
+.row
+  .col-md-12.text-center
+    %h1 Tickle Me Elmo for Dummies
+%br
+.row
+  .col-md-12
+    %img.dashboard
+.row.text-center
+  .col-md-3.border-right
+    %h3 Sales Today
+    %p.lead $45.60
+  .col-md-3.border-right
+    %h3 Weekly Sales
+    %p.lead $45.60
+  .col-md-3.border-right
+    %h3 Monthly Sales
+    %p.lead $234.30
+  .col-md-3
+    %h3 Total Sales
+    %p.lead $356.60
+%br
+%hr
+.row
+  .col-md-12.text-center
+    %h1 Sales Invoices
+%br
+.row
+  .col-md-12.text-center
+    %table.table.table-striped
+      %tr
+        %td Name
+        %td Email
+        %td Purchase Date
+        %td Price
+      -@payments.each do |payment|
+        %tr
+          %td
+            =payment.name
+          %td
+            =payment.email
+          %td
+            =payment.created_at
+          %td
+            =payment.price
+
+

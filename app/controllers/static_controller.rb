@@ -1,4 +1,5 @@
 class StaticController < ApplicationController
+  before_action :logged_out_only, except: :thank_you
   
   def thank_you
   end

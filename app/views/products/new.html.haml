@@ -1,0 +1,35 @@
+.row.text-center
+  .col-md-12
+    %h1 Upload New Product
+%hr
+.row
+  .col-md-5.col-md-offset-1
+    =bootstrap_form_for [@user,@product], html: {class: "form-vertical", multipart: true} do    |f|
+      =f.text_field :name
+      =f.number_field :price
+      %p.help-block Enter Price as whole number in cents. $10 would be entered as 1000
+      =f.text_field :short_description
+      =f.text_area :long_description
+      =f.file_field :product_image
+      %p.help-block Recommended 200 x 200 px
+      =f.file_field :product_file
+      %p.help-block Maximum size: 500mb
+      =f.submit "Create Product", class: "form-control form-group btn btn-success btn-lg btn-text-center"
+  .col-md-6
+    .example-image Example Product Page . jpg
+
+
+/%form.form-vertical
+/%input.form-control.form-group(name="name" placeholder="Product /Name" type="text")
+/%input.form-control.form-group(name="price" placeholder="Price" /type="number")
+/%input.form-control.form-group(name="short_desc" /placeholder="Short Description" type="text")
+/%textarea.form-control.form-group(name="long_desc" /placeholder="Long Description")
+/.form-group
+/  %label(for="product_file") Product File:
+/  %input.form-control(name="product_file"   placeholder="Product /File" type="file")
+/
+/.form-group
+/  %label(for="product_file") Product Thumbnail:
+/  %input.form-control(name="product_file"   placeholder="Product /File" type="file")
+/ 
+/%input.form-control.form-group.btn.btn-success.btn-lg.btn-text-/center(type="submit" value="Upload Product")

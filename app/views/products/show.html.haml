@@ -1,0 +1,21 @@
+-@layout = "product"
+.row
+  .col-md-4.col-md-offset-1
+    =image_tag @product.product_image_url, class: "product"
+  .col-md-6.col-md-offset-1.product-desc
+    %h1
+      ="#{@product.name} | #{@product.pretty_price}"
+    %p.lead
+      =@product.short_description
+    =link_to "Buy Now", new_user_product_payment_path(@user,@product),class: "btn btn-lg btn-success text-center"
+%hr
+.row.text-center
+  .col-md-12
+    %h2 Description
+    %br
+.row
+  .col-md-12
+    %p.lead
+      =@product.long_description
+
+

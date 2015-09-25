@@ -8,6 +8,18 @@ describe SessionsController do
     end
   end
 
+  describe "DELETE destroy" do
+    before { Fabricate(:user); session[:user_id] = User.first.id}
+    it "logs the current user out" do
+      get :destroy
+      expect(session[:user_id]).not_to be_present
+    end
+    it "sets the flash success message" do
+      post :destroy
+      expect(flash[:success]).to eq("You Successfully Logged Out.")
+    end
+  end
+
   describe "POST create" do
     before { User.create(username: "bob", password: "password", email: "email@example.com") }
     context "successful login info" do

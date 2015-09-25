@@ -9,12 +9,34 @@
       %a.navbar-brand(href="/ui") InDiY
 
     #main-nav-collapse.collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          =link_to "How it Works", how_it_works_path
-        %li
-          =link_to "Pricing", pricing_path
-        %li
-          =link_to "Log In", new_session_path
-        %li
-          =link_to "Sign Up", new_user_path, class: "btn btn-default"
+      -if logged_in?
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            =link_to "#", class: 'dropdown-toggle','data-toggle' => 'dropdown' do
+              %span.glyphicon.glyphicon-chevron-down
+              =current_user.username.titleize
+
+            %ul.dropdown-menu.dropdown-style
+              %li.dropped
+                =link_to user_path(current_user) do
+                  %span.glyphicon.glyphicon-list-alt
+                  Dashboard
+              %li.dropped
+                =link_to logout_path do
+                  %span.glyphicon.glyphicon-remove
+                  Logout
+              -if !current_user.stripe_connected?
+                %li.dropped
+                  =link_to '/auth/stripe_connect?scope=read_write' do
+                    %span.glyphicon.glyphicon-wrench
+                    Activate Account
+      -else 
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            =link_to "How it Works", how_it_works_path
+          %li
+            =link_to "Pricing", pricing_path
+          %li
+            =link_to "Log In", new_session_path
+          %li
+            =link_to "Sign Up", new_user_path, class: " btn btn-default" 

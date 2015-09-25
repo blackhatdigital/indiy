@@ -6,20 +6,30 @@
     %h3 Total Sales:
     %h3 Storage Space:
     %br
-    .btn.btn-danger.btn-lg
-      %span.glyphicon-plus
-        Upload New Product
+    -if current_user.stripe_connected?
+      =link_to new_user_product_path(current_user), class: "btn btn-danger btn-lg" do
+        %span.glyphicon-plus
+          Upload New Product
+    -else
+      .btn.btn-danger.btn-lg.disabled
+        %span.glyphicon-plus
+          Upload New Product
   .col-md-5
     %h1.text-center Products
-    %table.product-info.table.table-striped
-      %tr.bold
-        %td Product
-        %td Price
-        %td Weekly Sales
-        %td Total Sales        
-      -5.times do
-        %tr
-          %td Tickle Me Elmo for Dummies
-          %td $12.20
-          %td $321.3
-          %td $912.2
+    -@products.each do |product|
+      %table.product-info.table.table-striped
+        %tr.bold
+          %td Product
+          %td Price
+          %td Status
+          %td Total Sales 
+          %td Analytics       
+          %tr
+            %td
+              =link_to product.name, user_product_path(@user,product)
+            %td
+              =product.price
+            %td Cmaaaon
+            %td $912.2
+            %td
+              =link_to "Analytics", user_product_payments_path(product.user,product)
