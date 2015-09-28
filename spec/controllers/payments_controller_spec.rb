@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PaymentsController do
   let(:user) {Fabricate(:user)}
-  let(:product) {Fabricate(:product, price: 100, user: user)}
+  let(:product) {Fabricate(:product, name: "good item", price: 100, user: user)}
   describe "GET new" do
     before { get :new, {user_id: user.id,product_id: product.id}}
     it "renders the new template" do
@@ -30,9 +30,15 @@ describe PaymentsController do
       post :create, user_id: user.id,product_id: product.id, payment: {name: "bob", email: "roger@gmail.com", price: product.price.to_i,product_id: product.id,receipt: "asdfsefsd"}
     end
     context "successful charge" do
-      let(:charge) { double(:charge, successful?: true, customer_token: "askl") }
+      let(:charge) { double(:charge, successful?: true, receipt: "123456") }
       it "saves payment to the database" do
         expect(Payment.count).to eq(1)
+      end
+      it "saves the receipt number to the database" do
+        expect(Payment.first.receipt).to eq('123456')
+      end
+      it "Sends an invoice email" do
+        expect(ActionMailer::Base.deliveries.last.body).to have_content("Thank you for purchasing good item.")
       end
       it "redirects to the download page" do
         expect(response).to redirect_to user_product_payment_path(user,product,Payment.first,:params => {email: Payment.first.email})
@@ -42,7 +48,7 @@ describe PaymentsController do
       end
     end
     context "failed charge" do
-      let(:charge) {double(:charge,successful?: false, customer_token: "aalas", error_message: "declined maggot.")}
+      let(:charge) {double(:charge,successful?: false, receipt: "aalas", error_message: "declined maggot.")}
       it "renders the new template" do
         expect(response).to render_template(:new)
       end

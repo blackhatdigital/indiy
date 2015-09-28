@@ -10,6 +10,9 @@ describe UsersController do
       it "sets the current session id to the user id" do
         expect(session[:user_id]).to eq(User.first.id)
       end
+      it "sends the welcome email" do
+        expect(ActionMailer::Base.deliveries).not_to be_empty
+      end
       it "redirects to the thank you page" do
         expect(response).to redirect_to thankyou_path
       end

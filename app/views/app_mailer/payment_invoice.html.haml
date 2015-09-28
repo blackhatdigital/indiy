@@ -1,0 +1,15 @@
+%h1
+  ="Thank you for purchasing #{@payment.product.name}."
+%h3
+  Invoice Summary
+%h5
+  ="Product: #{@payment.product.name}"
+%h5
+  ="Price: #{@payment.product.pretty_price}"
+%h5
+  ="Purchase Date: #{@payment.created_at}"
+%h5
+  ="Receipt: #{@payment.receipt}"
+
+%h3
+  =link_to "Click here to download your product",user_product_payment_url(@payment.product.user,@payment.product,@payment,:params => {email: @payment.email})
