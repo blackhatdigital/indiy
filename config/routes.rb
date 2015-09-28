@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :products do
-      resources :payments, only: [:new,:create,:index]
+      resources :payments, only: [:new,:create,:index,:show]
     end
   end
 

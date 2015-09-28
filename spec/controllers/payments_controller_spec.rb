@@ -12,6 +12,7 @@ describe PaymentsController do
 
   describe "GET index" do
     before do
+      session[:user_id] = user.id
       Payment.create(product_id: product.id, price: 100)
       get :index, product_id: product.id, user_id: user.id
     end
@@ -33,8 +34,8 @@ describe PaymentsController do
       it "saves payment to the database" do
         expect(Payment.count).to eq(1)
       end
-      it "redirects to the product page" do
-        expect(response).to redirect_to user_product_path(user,product)
+      it "redirects to the download page" do
+        expect(response).to redirect_to user_product_payment_path(user,product,Payment.first,:params => {email: Payment.first.email})
       end
       it "associates the payment with the product" do
         expect(Payment.first.product).to eq(product)
@@ -54,4 +55,23 @@ describe PaymentsController do
     end
   end
 
+  describe "GET show" do
+    before { Payment.create(email: "bob@gmail.com", product_id: product.id) }
+    context "valid user" do
+      before { get :show, user_id: user.id, product_id: product.id, id: Payment.first.id, email: Payment.first.email }
+      it "renders the show template" do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context "invalid user" do
+      before { get :show, user_id: user.id, product_id: product.id, id: Payment.first.id, email: "wrong@gmail.com"}
+      it "sets the flash[:danger] message" do
+        expect(flash[:danger]).to eq("You are not authorised to access that page.")
+      end
+      it "redirects to the root path" do
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 end

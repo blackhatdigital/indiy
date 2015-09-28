@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_filter :logged_in_only, only: :index
+
   def index
     @payments = Product.find(params[:product_id]).payments
   end
@@ -10,13 +12,22 @@ class PaymentsController < ApplicationController
     if stripe_payment.successful?
       @payment = Payment.new(name: params[:payment][:name],email: params[:payment][:email],product: @product, price: @product.price)
       @payment.save
-      flash[:success] = "Your Purchase was Successful! We have sent the product to your email."
-      redirect_to user_product_path(@product.user,@product)
+      flash[:success] = "Your Purchase was Successful! Click the link bellow to download your product."
+      redirect_to user_product_payment_path(@product.user,@product,@payment,:params => {email: @payment.email})
     else
       flash[:danger] = stripe_payment.error_message
       @user = @product.user
       @payment = Payment.new     
       render :new
+    end
+  end
+
+  def show
+    @product = Product.find(params[:product_id])
+    @payment = Payment.find(params[:id])
+    if params[:email] != @payment.email
+      flash[:danger] = "You are not authorised to access that page."
+      redirect_to root_path
     end
   end
 
