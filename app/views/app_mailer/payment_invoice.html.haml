@@ -5,7 +5,7 @@
 %h5
   ="Product: #{@payment.product.name}"
 %h5
-  ="Price: #{@payment.product.pretty_price}"
+  ="Price: $#{@payment.price.to_i/100.00}"
 %h5
   ="Purchase Date: #{@payment.created_at}"
 %h5

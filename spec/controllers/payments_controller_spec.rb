@@ -13,11 +13,12 @@ describe PaymentsController do
   describe "GET index" do
     before do
       session[:user_id] = user.id
-      Payment.create(product_id: product.id, price: 100)
+      @pay1 = Payment.create(product_id: product.id, price: 100)
+      @pay2 = Payment.create(product_id: product.id, price: 100)
       get :index, product_id: product.id, user_id: user.id
     end
-    it "loads all the product payments into a variable" do
-      expect(assigns(:payments)).to eq([Payment.first])
+    it "loads all the product payments into a variable, order desc" do
+      expect(assigns(:payments)).to eq([@pay2,@pay1])
     end
     it "renders the index template" do
       expect(response).to render_template(:index)

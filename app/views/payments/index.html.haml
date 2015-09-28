@@ -4,20 +4,24 @@
 %br
 .row
   .col-md-12
-    %img.dashboard
+    =content_tag :div, "",id: "analytics", data: {payments: week_payments_graph(@product)}
 .row.text-center
   .col-md-3.border-right
     %h3 Sales Today
-    %p.lead $45.60
+    %p.lead
+      =cents_to_dollars(@product.sales_today)
   .col-md-3.border-right
     %h3 Weekly Sales
-    %p.lead $45.60
+    %p.lead
+      =cents_to_dollars(@product.sales_week)
   .col-md-3.border-right
     %h3 Monthly Sales
-    %p.lead $234.30
+    %p.lead
+      =cents_to_dollars(@product.sales_month)
   .col-md-3
     %h3 Total Sales
-    %p.lead $356.60
+    %p.lead
+      =cents_to_dollars(@product.sales_total)
 %br
 %hr
 .row
@@ -31,6 +35,7 @@
         %td Name
         %td Email
         %td Purchase Date
+        %td Receipt #
         %td Price
       -@payments.each do |payment|
         %tr
@@ -41,6 +46,9 @@
           %td
             =payment.created_at
           %td
-            =payment.price
+            =payment.receipt
+          %td
+            =cents_to_dollars(payment.price)
+=javascript_include_tag 'analytics'
 
 

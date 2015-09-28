@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_filter :logged_in_only, only: :index
 
   def index
+    @product = Product.find(params[:product_id])
     @payments = Product.find(params[:product_id]).payments
   end
 

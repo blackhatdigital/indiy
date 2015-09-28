@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require raphael
+//= require morris
 //= payments
 //= require bootstrap-sprockets
 //= require turbolinks
