@@ -6,7 +6,7 @@
         %span.sr-only Toggle Navigation
         -3.times do
           %span.icon-bar
-      %a.navbar-brand(href="/ui") InDiY
+      =link_to "Indiy", root_path, class: "navbar-brand"
 
     #main-nav-collapse.collapse.navbar-collapse
       -if logged_in?

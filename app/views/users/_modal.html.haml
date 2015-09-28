@@ -1,0 +1,15 @@
+#product-link.modal.fade
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        %button.close(type="button" data-dismiss="modal")
+          &times;
+        %h4.modal-title 
+          ="#{product.name.titleize} Sharable Link"
+      .modal-body
+        %br
+        %p.lead.text-center
+          =user_product_url(@user,product)
+      .modal-footer
+        %p.help
+          Pretty ugly but it works..

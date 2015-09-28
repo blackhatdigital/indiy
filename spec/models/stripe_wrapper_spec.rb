@@ -17,19 +17,23 @@ describe StripeWrapper do
       context "with valid card", :vcr do
         let(:card_number) { '4242424242424242' }
         it "makes a successful charge" do
-          charge = StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, application_fee: 100)
+          charge = StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, fee: (1000*4/100))
           expect(charge).to be_successful
         end
 
+        it "sets the application fee to 4%" do
+          charge = StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, fee: (1000*4/100))
+          expect(charge.fee).to eq("fee_74307s9XdnrpN0")
+        end
         it "returns a receipt number" do
-          charge = StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, application_fee: 100)
+          charge = StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, fee: (1000*4/100))
           expect(charge.receipt).to be_present
         end
       end
 
       context "with invalid card", :vcr do
         let(:card_number) { '4000000000000002' }
-        let(:response) { StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key) }
+        let(:response) { StripeWrapper::Charge.create(amount: 1000, source: token, account: account_key, fee: (1000*4/100)) }
         it "does not make a successful charge" do
           expect(response).not_to be_successful
         end

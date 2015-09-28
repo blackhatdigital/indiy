@@ -15,21 +15,5 @@
       =f.file_field :product_file
       %p.help-block Maximum size: 500mb
       =f.submit "Create Product", class: "form-control form-group btn btn-success btn-lg btn-text-center"
-  .col-md-6
-    .example-image Example Product Page . jpg
-
-
-/%form.form-vertical
-/%input.form-control.form-group(name="name" placeholder="Product /Name" type="text")
-/%input.form-control.form-group(name="price" placeholder="Price" /type="number")
-/%input.form-control.form-group(name="short_desc" /placeholder="Short Description" type="text")
-/%textarea.form-control.form-group(name="long_desc" /placeholder="Long Description")
-/.form-group
-/  %label(for="product_file") Product File:
-/  %input.form-control(name="product_file"   placeholder="Product /File" type="file")
-/
-/.form-group
-/  %label(for="product_file") Product Thumbnail:
-/  %input.form-control(name="product_file"   placeholder="Product /File" type="file")
-/ 
-/%input.form-control.form-group.btn.btn-success.btn-lg.btn-text-/center(type="submit" value="Upload Product")
+  .col-md-6.text-center.hidden-xs
+    %img.example-image(src="/upload_example.png")

@@ -10,7 +10,7 @@ module StripeWrapper
 
     def self.create(options={})
       begin
-        response = Stripe::Charge.create({amount: options[:amount], currency: 'usd', source: options[:source], description: options[:description], application_fee: options[:application_fee]},stripe_account: options[:account])
+        response = Stripe::Charge.create({amount: options[:amount], currency: 'aud', source: options[:source], description: options[:description], application_fee: options[:fee]},stripe_account: options[:account])
         new(response: response)
       rescue Stripe::CardError => e
         new(error_message: e.message)
@@ -23,6 +23,10 @@ module StripeWrapper
 
     def receipt
       @response.id
+    end
+
+    def fee
+      @response.application_fee
     end
   end
 end

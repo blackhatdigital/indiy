@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create(username: "admin", password: "password", publishable_key: "pk_test_hDN0uNbAFxQ5LDzi9jypvZCJ", stripe_user_id: "acct_16nOEmIDysV1eWIb", secret_key: "sk_test_gzIJgC8zxpsvpIRCbqNHIM12")
