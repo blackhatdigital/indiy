@@ -499,6 +499,7 @@ DEPENDENCIES
   pg
   pry
   rails (= 4.2.1)
+  redis
   rest-client
   rspec-rails
   sass-rails (~> 5.0)
