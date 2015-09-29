@@ -22,6 +22,7 @@ gem 'carrierwave'
 gem 'carrierwave_direct'
 gem 'mini_magick'
 gem 'chartkick'
+gem 'unicorn'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
