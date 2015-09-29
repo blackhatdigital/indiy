@@ -66,6 +66,10 @@ group :development do
   gem 'letter_opener'
 end
 
+group :production do
+  gem 'mailgun_rails'
+end
+
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
