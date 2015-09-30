@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   before_action :logged_in_only, except: [:new, :create]
   def show
-    @user = current_user
-    @products = current_user.products.all
+    @user = User.find(params[:id])
+    @products = @user.products.all
+    if @user != current_user
+      redirect_to user_path(current_user)
+      flash[:danger] = "You cannot access other users data."
+    end
   end
 
   def new

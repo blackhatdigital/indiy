@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe UsersController do
+  describe "GET show" do
+    context "not signed in" do
+
+    end
+    context "signed in" do
+      before do
+        User.create(id:1,username: "bob", password: "password", email: "email@e.com")
+        User.create(id:2,username: "steve",password: "password", email: "email@cs.com")
+        session[:user_id] = 2
+      end
+      it "redirects to the current user path if user does not match logged in user" do
+        get :show, id: 1
+        expect(response).to redirect_to user_path(id: 2)
+      end
+      it "sets the flash message if current user does not match logged in user" do
+        get :show, id: 1
+        expect(flash[:danger]).to eq("You cannot access other users data.")
+      end
+    end
+  end
+
   describe "POST create" do
     context "valid input" do
       before { post :create, user: {username: "bob", password: "steve", email: "rohan@gmail.com"}}

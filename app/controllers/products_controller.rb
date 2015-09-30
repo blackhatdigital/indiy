@@ -24,7 +24,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @user = @product.user
+    if @product.user != current_user
+      flash[:danger] = "You cannot access other users data."
+      redirect_to user_path(current_user)
+    else
+      @user = @product.user
+    end
   end
 
   private

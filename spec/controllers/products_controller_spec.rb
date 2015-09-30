@@ -41,4 +41,26 @@ describe ProductsController do
       end
     end
   end
+
+  describe "GET show" do
+    before do
+      User.create(id:1,username: "bob", password: "password", email: "email@e.com")
+      User.create(id:2,username: "steve",password: "password", email: "email@cs.com")
+      Product.create(user_id: 2, id:1, name: "lala", short_description: "lalala", price: 100)
+      Product.create(user_id: 1, id:2, name: "lala", short_description: "lalala", price: 100)
+      session[:user_id] = 1
+    end
+    it "redirects to user path if user does not match logged in user" do
+      get :show, user_id: 2, id: 1
+      expect(response).to redirect_to user_path(id: 1)
+    end
+    it "sets the flash danger variable if user does not match logged in user" do
+      get :show, user_id: 2, id: 1
+      expect(flash[:danger]).to eq("You cannot access other users data.")
+    end
+    it "renders the show template if logged in user matches product user" do
+      get :show, user_id:1 , id:2
+      expect(response).to render_template :show
+    end
+  end
 end
