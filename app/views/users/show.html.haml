@@ -17,22 +17,21 @@
           Upload New Product
   .col-md-5
     %h1.text-center Products
-    -@products.each do |product|
-      %table.product-info.table.table-striped
-        %tr.bold
-          %td Product
-          %td Price
-          %td Total Sales 
-          %td Analytics       
+    %table.product-info.table.table-striped
+      %tr.bold
+        %td Product
+        %td Price
+        %td Total Sales 
+        %td Analytics       
+        -@products.each do |product|
           %tr
             %td
               =link_to product.name, user_product_path(@user,product)
               |
-              %a(href="#" data-toggle="modal" data-target="#product-link")
-                (Sharable Link)
+              =link_to "(Sharable Link)", "#", data: {toggle: "modal" , target: "##{product.id}-product-link"}
               =render 'modal', product: product
             %td
-              =product.price
+              =cents_to_dollars(product.price)
             %td
               =cents_to_dollars(product.sales_total)
             %td

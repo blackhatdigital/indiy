@@ -9,8 +9,11 @@ class User < ActiveRecord::Base
 
   def total_sales
     sum = 0
-    Product.where(user_id: id).each do |product|
-      sum += product.payments.map(&:price).reduce(:+)
+    @products = Product.where(user_id: id)
+    if @products
+      @products.each do |product|
+        sum += product.payments.map(&:price).reduce(:+) if product.payments.present?
+      end
     end
     sum
   end
